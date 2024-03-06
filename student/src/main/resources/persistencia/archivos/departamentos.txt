@@ -1,0 +1,10 @@
+Departamento{id=1, nombre=Antioquia}
+Departamento{id=2, nombre=Boyaca}
+Departamento{id=1, nombre=Antioquia}
+Departamento{id=2, nombre=Boyaca}
+Departamento{id=1, nombre=Cundinamarca}
+Departamento{id=2, nombre=Boyaca}
+Departamento{id=3, nombre=Meta}
+Departamento{id=1, nombre=Cundinamarca}
+Departamento{id=2, nombre=Boyaca}
+Departamento{id=3, nombre=Meta}

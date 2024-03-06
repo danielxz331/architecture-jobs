@@ -1,9 +1,9 @@
-package crudarchivos;
+package com.app.student.crudArchivos;
 
 import java.io.*;
 import java.util.ArrayList;
-import aplicacionsolid.Estudiante;
-import interfaces.VisualizarInformacion;
+import com.app.student.AplicacionSolid.Estudiante;
+import com.app.student.interfaces.VisualizarInformacion;
 
 /**
  *
@@ -12,7 +12,7 @@ import interfaces.VisualizarInformacion;
 public class EstudiantesInscritos implements VisualizarInformacion{
 
     String pathProyecto = System.getProperty("user.dir"); // Obtiene el directorio actual del proyecto
-    String rutaArchivo = pathProyecto + "/src/persistencia/archivos/estudiantes.txt";
+    String rutaArchivo = pathProyecto + "/src/main/resources/persistencia/archivos/estudiantes.txt";
 
     private File archivo = new File(rutaArchivo);
 

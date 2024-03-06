@@ -1,51 +1,37 @@
-package crudarchivos;
+package com.app.student.crudArchivos;
 
 import java.io.*;
 import java.util.ArrayList;
-import aplicacionsolid.Estudiante;
-import interfaces.VisualizarInformacion;
+
+import com.app.student.AplicacionSolid.Municipio;
+import com.app.student.interfaces.VisualizarInformacion;
+
 
 /**
  *
  * @author daniel
  */
-public class EstudiantesInscritos implements VisualizarInformacion{
-
+public class MunicipiosCreados implements VisualizarInformacion{
+    private ArrayList<Municipio> lista= new ArrayList();
     String pathProyecto = System.getProperty("user.dir"); // Obtiene el directorio actual del proyecto
-    String rutaArchivo = pathProyecto + "/src/persistencia/archivos/estudiantes.txt";
+    String rutaArchivo = pathProyecto + "/src/main/resources/persistencia/archivos/municipios.txt";
 
     private File archivo = new File(rutaArchivo);
 
-    private ArrayList<Estudiante> listado = new ArrayList();
-
-    public String recorrerLista(ArrayList<Estudiante> lista)
-    {
-        String objetos = "";
-
-        for (Estudiante estudiante : lista) {
-
-            objetos += estudiante.toString()+"\r\n";
-        }
-
-        return objetos;
+    public void agregarMunicipio (Municipio municipio) {
+        this.lista.add(municipio);
     }
 
-
-
-    public void agregarEstudiante (Estudiante estudiante) {
-        this.listado.add(estudiante);
-    }
-
-    public void eliminarEstudianteArchivo (int id) {
+    public void eliminarMunicipioArchivo (int id) {
         try {
             BufferedReader archivoLeer = new BufferedReader(new InputStreamReader(new FileInputStream(archivo), "utf-8"));
             StringBuilder contenidoArchivo = new StringBuilder();
 
             String lineaLeida;
             while ((lineaLeida = archivoLeer.readLine()) != null) {
-                if (lineaLeida.contains("Estudiante"+"{id=" + id)) {
+                if (lineaLeida.contains("Municipio"+"{id="+id)) {
                     System.out.println(lineaLeida);
-                    System.out.println("Estudiante eliminado correctamente");
+                    System.out.println("Municipio eliminado correctamente");
                 }
                 else {
                     contenidoArchivo.append(lineaLeida).append("\r\n");
@@ -61,10 +47,9 @@ public class EstudiantesInscritos implements VisualizarInformacion{
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
-
     }
 
-    public void editarEstudianteArchivo(int id, Estudiante estudiante)
+    public void editarMunicipioArchivo(int id, Municipio municipio)
     {
         try {
             BufferedReader archivoLeer = new BufferedReader(new InputStreamReader(new FileInputStream(archivo), "utf-8"));
@@ -72,8 +57,8 @@ public class EstudiantesInscritos implements VisualizarInformacion{
 
             String lineaLeida;
             while ((lineaLeida = archivoLeer.readLine()) != null) {
-                if (lineaLeida.contains("Estudiante"+"{id="+id)) {
-                    lineaLeida = estudiante.toString();
+                if (lineaLeida.contains("Municipio"+"{id="+id)) {
+                    lineaLeida = municipio.toString();
                 }
                 contenidoArchivo.append(lineaLeida).append("\r\n");
             }
@@ -89,7 +74,7 @@ public class EstudiantesInscritos implements VisualizarInformacion{
         }
     }
 
-    public String obtenerEstudiantes()
+    public String obtenerMunicipios()
     {
         StringBuilder contenidoArchivo = new StringBuilder();
 
@@ -115,7 +100,7 @@ public class EstudiantesInscritos implements VisualizarInformacion{
         return contenidoArchivo.toString();
     }
 
-    public void guardarEstudiante(Estudiante estudiante)
+    public void guardarMunicipio(Municipio municipio)
     {
         try {
 
@@ -125,25 +110,37 @@ public class EstudiantesInscritos implements VisualizarInformacion{
 
             BufferedWriter archivoEscribir = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo, true), "utf-8"));
 
-            archivoEscribir.write(estudiante.toString()+"\r\n");
+            archivoEscribir.write(municipio.toString()+"\r\n");
 
             archivoEscribir.close();
 
-            System.out.println("Estudiante agregado correctamente");
+            System.out.println("Municipio agregado correctamente");
 
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
     }
 
+    public String recorrerLista(ArrayList<Municipio> lista)
+    {
+        String objetos = "";
+
+        for (Municipio municipio : lista) {
+
+            objetos += municipio.toString()+"\r\n";
+        }
+
+        return objetos;
+    }
+
     @Override
     public String nombreClase() {
-        return "EstudiantesInscritos";
+        return "MunicipiosCreados";
     }
 
     @Override
     public String informacionObjeto() {
-        String objetos = this.recorrerLista(listado);
+        String objetos = this.recorrerLista(lista);
 
         return objetos;
     }
@@ -151,12 +148,12 @@ public class EstudiantesInscritos implements VisualizarInformacion{
     @Override
     public void persistir()
     {
-        for (Estudiante estudiante : this.listado) {
+        for (Municipio municipio : this.lista) {
 
-            this.guardarEstudiante(estudiante);
+            this.guardarMunicipio(municipio);
 
         }
 
-        this.listado.clear();
+        this.lista.clear();
     }
 }
