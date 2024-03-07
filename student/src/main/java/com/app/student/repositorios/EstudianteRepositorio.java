@@ -17,32 +17,31 @@ public class EstudianteRepositorio implements Repositorio<Estudiante>{
 
 
     @Override
-    public void crear(Estudiante estudiante) {
+    public void create(Estudiante estudiante) {
         // guarda en base de datos
-        crudEstudiante.crear( estudiante );
+        crudEstudiante.create( estudiante );
 
         // guarda en archivos
-        estudianteInscritos.agregarEstudiante(estudiante);
-        estudianteInscritos.persistir();
+        estudianteInscritos.create(estudiante);
     }
 
 
     @Override
-    public Estudiante obtener(int id) {
-        return crudEstudiante.obtener(id);
+    public Estudiante get(int id) {
+        return crudEstudiante.get(id);
     }
 
 
     @Override
-    public void editar(int id, Estudiante estudiante) {
-        crudEstudiante.editar(id, estudiante);
-        estudianteInscritos.editarEstudianteArchivo(id, estudiante);
+    public void update(int id, Estudiante estudiante) {
+        crudEstudiante.update(id, estudiante);
+        estudianteInscritos.update(id, estudiante);
     }
 
 
     @Override
-    public void eliminar(int id) {
-        crudEstudiante.eliminar(id);
-        estudianteInscritos.eliminarEstudianteArchivo(id);
+    public void delete(int id) {
+        crudEstudiante.delete(id);
+        estudianteInscritos.delete(id);
     }
 }

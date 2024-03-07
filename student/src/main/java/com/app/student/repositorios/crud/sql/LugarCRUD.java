@@ -21,7 +21,7 @@ public class LugarCRUD implements CRUD<Lugar>{
     }
 
     @Override
-    public void crear(Lugar lugar) {
+    public void create(Lugar lugar) {
         String query = "INSERT INTO lugar (id, direccion, departamento_id, municipio_id) VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, lugar.getId());
@@ -37,7 +37,7 @@ public class LugarCRUD implements CRUD<Lugar>{
     }
 
     @Override
-    public Lugar obtener(int id) {
+    public Lugar get(int id) {
         String query = "SELECT * FROM lugar WHERE id = ?";
         String direccion = "";
         int departamento_id = 1;
@@ -64,13 +64,13 @@ public class LugarCRUD implements CRUD<Lugar>{
             e.printStackTrace();
         }
 
-        Departamento departamento_asociado = departamentoCRUD.obtener(departamento_id);
-        Municipio municipio_asociado = municipioCRUD.obtener(municipio_id);
+        Departamento departamento_asociado = departamentoCRUD.get(departamento_id);
+        Municipio municipio_asociado = municipioCRUD.get(municipio_id);
         return new Lugar(id, direccion, departamento_asociado, municipio_asociado);
     }
 
     @Override
-    public void editar(int id, Lugar lugar) {
+    public void update(int id, Lugar lugar) {
         String query = "UPDATE lugar SET id = ?, direccion = ?, departamento_id = ?, municipio_id = ? WHERE id = ?";
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, lugar.getId());
@@ -87,7 +87,7 @@ public class LugarCRUD implements CRUD<Lugar>{
     }
 
     @Override
-    public void eliminar(int id) {
+    public void delete(int id) {
         String query = "DELETE FROM lugar WHERE id = ?";
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, id);

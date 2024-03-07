@@ -20,7 +20,7 @@ public class DepartamentoCRUD implements CRUD<Departamento> {
     }
 
     @Override
-    public void crear(Departamento departamento) {
+    public void create(Departamento departamento) {
         String query = "INSERT INTO departamento (id, nombre) VALUES (?, ?)";
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, departamento.getId());
@@ -34,7 +34,7 @@ public class DepartamentoCRUD implements CRUD<Departamento> {
     }
 
     @Override
-    public Departamento obtener(int id) {
+    public Departamento get(int id) {
         String query = "SELECT * FROM departamento WHERE id = ?";
         String nombre = "";
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
@@ -58,7 +58,7 @@ public class DepartamentoCRUD implements CRUD<Departamento> {
     }
 
     @Override
-    public void editar(int id, Departamento departamento) {
+    public void update(int id, Departamento departamento) {
         String query = "UPDATE departamento SET id = ?, nombre = ? WHERE id = ?";
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, departamento.getId());
@@ -73,7 +73,7 @@ public class DepartamentoCRUD implements CRUD<Departamento> {
     }
 
     @Override
-    public void eliminar(int id) {
+    public void delete(int id) {
         String query = "DELETE FROM departamento WHERE id = ?";
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, id);

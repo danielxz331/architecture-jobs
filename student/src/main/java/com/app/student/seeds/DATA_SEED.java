@@ -55,51 +55,51 @@ public class DATA_SEED {
 
     public static void ejecutar(){
 
-        departamentoRepositorio.crear(departamento1);
-        departamentoRepositorio.crear(departamento2);
-        departamentoRepositorio.crear(departamento3);
+        departamentoRepositorio.create(departamento1);
+        departamentoRepositorio.create(departamento2);
+        departamentoRepositorio.create(departamento3);
 
-        municipioRepositorio.crear(municipio1);
-        municipioRepositorio.crear(municipio2);
-        municipioRepositorio.crear(municipio3);
-        municipioRepositorio.crear(municipio4);
-        municipioRepositorio.crear(municipio5);
+        municipioRepositorio.create(municipio1);
+        municipioRepositorio.create(municipio2);
+        municipioRepositorio.create(municipio3);
+        municipioRepositorio.create(municipio4);
+        municipioRepositorio.create(municipio5);
 
-        lugarRepositorio.crear(lugar1);
-        lugarRepositorio.crear(lugar2);
-        lugarRepositorio.crear(lugar3);
-        lugarRepositorio.crear(lugar4);
-        lugarRepositorio.crear(lugar5);
+        lugarRepositorio.create(lugar1);
+        lugarRepositorio.create(lugar2);
+        lugarRepositorio.create(lugar3);
+        lugarRepositorio.create(lugar4);
+        lugarRepositorio.create(lugar5);
 
-        programaRepositorio.crear(programa1);
-        programaRepositorio.crear(programa2);
-        programaRepositorio.crear(programa3);
-        programaRepositorio.crear(programa4);
+        programaRepositorio.create(programa1);
+        programaRepositorio.create(programa2);
+        programaRepositorio.create(programa3);
+        programaRepositorio.create(programa4);
 
-        estudianteRepositorio.crear(estudiante1);
-        estudianteRepositorio.crear(estudiante2);
-        estudianteRepositorio.crear(estudiante3);
-        estudianteRepositorio.crear(estudiante4);
-        estudianteRepositorio.crear(estudiante5);
-        estudianteRepositorio.crear(estudiante6);
-        estudianteRepositorio.crear(estudiante7);
-        estudianteRepositorio.crear(estudiante8);
-        estudianteRepositorio.crear(estudiante9);
-        estudianteRepositorio.crear(estudiante10);
+        estudianteRepositorio.create(estudiante1);
+        estudianteRepositorio.create(estudiante2);
+        estudianteRepositorio.create(estudiante3);
+        estudianteRepositorio.create(estudiante4);
+        estudianteRepositorio.create(estudiante5);
+        estudianteRepositorio.create(estudiante6);
+        estudianteRepositorio.create(estudiante7);
+        estudianteRepositorio.create(estudiante8);
+        estudianteRepositorio.create(estudiante9);
+        estudianteRepositorio.create(estudiante10);
 
 
 
-        estudianteRepositorio.eliminar(estudiante7.getId());
-        estudiante8.setNombres("Chamito");
-        estudianteRepositorio.editar(estudiante8.getId(), estudiante8);
-
-        departamentoRepositorio.eliminar(departamento3.getId());
-        departamento1.setNombre("Antioquia");
-        departamentoRepositorio.editar(departamento1.getId(), departamento1);
-
-        municipioRepositorio.eliminar(municipio5.getId());
-        municipio4.setNombre("Duitamita");
-        municipioRepositorio.editar(municipio4.getId(), municipio4);
+//        estudianteRepositorio.delete(estudiante7.getId());
+//        estudiante8.setNombres("Chamito");
+//        estudianteRepositorio.update(estudiante8.getId(), estudiante8);
+//
+//        departamentoRepositorio.delete(departamento3.getId());
+//        departamento1.setNombre("Antioquia");
+//        departamentoRepositorio.update(departamento1.getId(), departamento1);
+//
+//        municipioRepositorio.delete(municipio5.getId());
+//        municipio4.setNombre("Duitamita");
+//        municipioRepositorio.update(municipio4.getId(), municipio4);
 
     }
 

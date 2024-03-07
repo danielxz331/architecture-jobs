@@ -22,7 +22,7 @@ public class EstudianteCRUD implements CRUD<Estudiante>{
     }
 
     @Override
-    public void crear(Estudiante estudiante) {
+    public void create(Estudiante estudiante) {
         String query = "INSERT INTO estudiante (id, nombres, apellidos, codigo, programa_id, lugar_id) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, estudiante.getId());
@@ -40,7 +40,7 @@ public class EstudianteCRUD implements CRUD<Estudiante>{
     }
 
     @Override
-    public Estudiante obtener(int id) {
+    public Estudiante get(int id) {
         String query = "SELECT * FROM estudiante WHERE id = ?";
         String nombres = "";
         String apellidos = "";
@@ -71,14 +71,14 @@ public class EstudianteCRUD implements CRUD<Estudiante>{
             e.printStackTrace();
         }
 
-        Programa programa_asociado = programaCRUD.obtener(programa_id);
-        Lugar lugar_asociado = lugarCRUD.obtener(lugar_id);
+        Programa programa_asociado = programaCRUD.get(programa_id);
+        Lugar lugar_asociado = lugarCRUD.get(lugar_id);
 
         return new Estudiante(nombres, apellidos, id, codigo, programa_asociado, lugar_asociado);
     }
 
     @Override
-    public void editar(int id, Estudiante estudiante) {
+    public void update(int id, Estudiante estudiante) {
         String query = "UPDATE estudiante SET id = ?, nombres = ?, apellidos = ?, codigo = ?, programa_id = ?, lugar_id = ? WHERE id = ?";
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, estudiante.getId());
@@ -97,7 +97,7 @@ public class EstudianteCRUD implements CRUD<Estudiante>{
     }
 
     @Override
-    public void eliminar(int id) {
+    public void delete(int id) {
         String query = "DELETE FROM estudiante WHERE id = ?";
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, id);

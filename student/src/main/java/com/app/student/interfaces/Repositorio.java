@@ -2,13 +2,13 @@ package com.app.student.interfaces;
 
 public interface Repositorio<Obj> {
 
-    void crear(Obj objeto);
+    void create(Obj objeto);
 
-    Obj obtener(int id);
+    Obj get(int id);
 
-    void editar(int id, Obj objeto);
+    void update(int id, Obj objeto);
 
-    void eliminar(int id);
+    void delete(int id);
 
 }
 

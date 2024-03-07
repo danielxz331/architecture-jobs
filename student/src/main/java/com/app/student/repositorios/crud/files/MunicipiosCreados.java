@@ -5,121 +5,19 @@ import java.util.ArrayList;
 
 import com.app.student.aplicacion.Municipio;
 import com.app.student.interfaces.VisualizarInformacion;
+import com.app.student.interfaces.CRUD;
 
 
 /**
  *
  * @author daniel
  */
-public class MunicipiosCreados implements VisualizarInformacion{
+public class MunicipiosCreados implements VisualizarInformacion, CRUD<Municipio>{
     private ArrayList<Municipio> lista= new ArrayList();
     String pathProyecto = System.getProperty("user.dir"); // Obtiene el directorio actual del proyecto
     String rutaArchivo = pathProyecto + "/src/main/resources/persistencia/archivos/municipios.txt";
 
     private File archivo = new File(rutaArchivo);
-
-    public void agregarMunicipio (Municipio municipio) {
-        this.lista.add(municipio);
-    }
-
-    public void eliminarMunicipioArchivo (int id) {
-        try {
-            BufferedReader archivoLeer = new BufferedReader(new InputStreamReader(new FileInputStream(archivo), "utf-8"));
-            StringBuilder contenidoArchivo = new StringBuilder();
-
-            String lineaLeida;
-            while ((lineaLeida = archivoLeer.readLine()) != null) {
-                if (lineaLeida.contains("Municipio"+"{id="+id)) {
-                    System.out.println(lineaLeida);
-                    System.out.println("Municipio eliminado correctamente");
-                }
-                else {
-                    contenidoArchivo.append(lineaLeida).append("\r\n");
-                }
-            }
-
-            archivoLeer.close();
-
-            BufferedWriter archivoEscribir = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo), "utf-8"));
-            archivoEscribir.write(contenidoArchivo.toString());
-            archivoEscribir.close();
-
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e.getMessage());
-        }
-    }
-
-    public void editarMunicipioArchivo(int id, Municipio municipio)
-    {
-        try {
-            BufferedReader archivoLeer = new BufferedReader(new InputStreamReader(new FileInputStream(archivo), "utf-8"));
-            StringBuilder contenidoArchivo = new StringBuilder();
-
-            String lineaLeida;
-            while ((lineaLeida = archivoLeer.readLine()) != null) {
-                if (lineaLeida.contains("Municipio"+"{id="+id)) {
-                    lineaLeida = municipio.toString();
-                }
-                contenidoArchivo.append(lineaLeida).append("\r\n");
-            }
-
-            archivoLeer.close();
-
-            BufferedWriter archivoEscribir = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo), "utf-8"));
-            archivoEscribir.write(contenidoArchivo.toString());
-            archivoEscribir.close();
-
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e.getMessage());
-        }
-    }
-
-    public String obtenerMunicipios()
-    {
-        StringBuilder contenidoArchivo = new StringBuilder();
-
-        try {
-
-            String lineaLeida = "";
-
-            if (archivo.exists()) {
-                BufferedReader archivoLeer = new BufferedReader(new FileReader(archivo));
-
-                while ((lineaLeida = archivoLeer.readLine()) != null) {
-                    contenidoArchivo.append(lineaLeida).append("\n");
-                }
-
-                archivoLeer.close();
-            } else {
-                System.out.println("No encuentra el archivo");
-            }
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e.getMessage());
-        }
-
-        return contenidoArchivo.toString();
-    }
-
-    public void guardarMunicipio(Municipio municipio)
-    {
-        try {
-
-            if (archivo.exists()) {
-                archivo.createNewFile();
-            }
-
-            BufferedWriter archivoEscribir = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo, true), "utf-8"));
-
-            archivoEscribir.write(municipio.toString()+"\r\n");
-
-            archivoEscribir.close();
-
-            System.out.println("Municipio agregado correctamente");
-
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e.getMessage());
-        }
-    }
 
     public String recorrerLista(ArrayList<Municipio> lista)
     {
@@ -150,10 +48,113 @@ public class MunicipiosCreados implements VisualizarInformacion{
     {
         for (Municipio municipio : this.lista) {
 
-            this.guardarMunicipio(municipio);
+            this.create(municipio);
 
         }
 
         this.lista.clear();
+    }
+
+    @Override
+    public void create(Municipio municipio) {
+        try {
+
+            if (archivo.exists()) {
+                archivo.createNewFile();
+            }
+
+            BufferedWriter archivoEscribir = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo, true), "utf-8"));
+
+            archivoEscribir.write(municipio.toString()+"\r\n");
+
+            archivoEscribir.close();
+
+            System.out.println("Municipio agregado correctamente");
+
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public Municipio get(int id) {
+        try {
+
+            String lineaLeida = "";
+
+            if (archivo.exists()) {
+                BufferedReader archivoLeer = new BufferedReader(new FileReader(archivo));
+
+                while ((lineaLeida = archivoLeer.readLine()) != null) {
+                    if (lineaLeida.contains("Municipio"+"{id="+id)) {
+                        System.out.println(lineaLeida);
+                        String[] partes = lineaLeida.split(",");
+                        String nombre = partes[1].split("=")[1];
+                        String idDepartamento = partes[2].split("=")[1];
+                        return new Municipio(id, nombre, null);
+                    }
+                }
+
+                archivoLeer.close();
+            } else {
+                System.out.println("No encuentra el archivo");
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public void update(int id, Municipio municipio) {
+        try {
+            BufferedReader archivoLeer = new BufferedReader(new InputStreamReader(new FileInputStream(archivo), "utf-8"));
+            StringBuilder contenidoArchivo = new StringBuilder();
+
+            String lineaLeida;
+            while ((lineaLeida = archivoLeer.readLine()) != null) {
+                if (lineaLeida.contains("Municipio"+"{id="+id)) {
+                    lineaLeida = municipio.toString();
+                }
+                contenidoArchivo.append(lineaLeida).append("\r\n");
+            }
+
+            archivoLeer.close();
+
+            BufferedWriter archivoEscribir = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo), "utf-8"));
+            archivoEscribir.write(contenidoArchivo.toString());
+            archivoEscribir.close();
+
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void delete(int id) {
+        try {
+            BufferedReader archivoLeer = new BufferedReader(new InputStreamReader(new FileInputStream(archivo), "utf-8"));
+            StringBuilder contenidoArchivo = new StringBuilder();
+
+            String lineaLeida;
+            while ((lineaLeida = archivoLeer.readLine()) != null) {
+                if (lineaLeida.contains("Municipio"+"{id="+id)) {
+                    System.out.println(lineaLeida);
+                    System.out.println("Municipio eliminado correctamente");
+                }
+                else {
+                    contenidoArchivo.append(lineaLeida).append("\r\n");
+                }
+            }
+
+            archivoLeer.close();
+
+            BufferedWriter archivoEscribir = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo), "utf-8"));
+            archivoEscribir.write(contenidoArchivo.toString());
+            archivoEscribir.close();
+
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
     }
 }

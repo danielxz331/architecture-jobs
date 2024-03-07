@@ -16,27 +16,28 @@ public class LugarRepositorio implements Repositorio<Lugar>{
     ListaLugares listaLugares = new ListaLugares();
 
     @Override
-    public void crear(Lugar lugar) {
+    public void create(Lugar lugar) {
         // guarda en base de datos
-        lugarCRUD.crear( lugar );
+        lugarCRUD.create( lugar );
 
         // guarda en archivos
-        listaLugares.agregarLugar(lugar);
-        listaLugares.persistir();
+        listaLugares.create(lugar);
     }
 
     @Override
-    public Lugar obtener(int id) {
-        return lugarCRUD.obtener(id);
+    public Lugar get(int id) {
+        return lugarCRUD.get(id);
     }
 
     @Override
-    public void editar(int id, Lugar lugar) {
-
+    public void update(int id, Lugar lugar) {
+        lugarCRUD.update(id, lugar);
+        listaLugares.update(id, lugar);
     }
 
     @Override
-    public void eliminar(int id) {
-
+    public void delete(int id) {
+        lugarCRUD.delete(id);
+        listaLugares.delete(id);
     }
 }

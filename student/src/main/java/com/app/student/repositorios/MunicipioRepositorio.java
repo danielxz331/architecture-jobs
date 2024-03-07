@@ -16,29 +16,28 @@ public class MunicipioRepositorio implements Repositorio<Municipio>{
     MunicipiosCreados municipiosCreados = new MunicipiosCreados();
 
     @Override
-    public void crear(Municipio municipio) {
+    public void create(Municipio municipio) {
         // guarda en base de datos
-        municipioCRUD.crear(municipio);
+        municipioCRUD.create(municipio);
 
         // guarda en archivos
-        municipiosCreados.agregarMunicipio(municipio);
-        municipiosCreados.persistir();
+        municipiosCreados.create(municipio);
     }
 
     @Override
-    public Municipio obtener(int id) {
-        return municipioCRUD.obtener(id);
+    public Municipio get(int id) {
+        return municipioCRUD.get(id);
     }
 
     @Override
-    public void editar(int id, Municipio municipio) {
-        municipioCRUD.editar(id, municipio);
-        municipiosCreados.editarMunicipioArchivo(id, municipio);
+    public void update(int id, Municipio municipio) {
+        municipioCRUD.update(id, municipio);
+        municipiosCreados.update(id, municipio);
     }
 
     @Override
-    public void eliminar(int id) {
-        municipioCRUD.eliminar(id);
-        municipiosCreados.eliminarMunicipioArchivo(id);
+    public void delete(int id) {
+        municipioCRUD.delete(id);
+        municipiosCreados.delete(id);
     }
 }

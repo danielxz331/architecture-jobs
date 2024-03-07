@@ -21,7 +21,7 @@ public class MunicipioCRUD implements CRUD<Municipio>{
     }
 
     @Override
-    public void crear(Municipio municipio) {
+    public void create(Municipio municipio) {
 
         String query = "INSERT INTO municipio (id, nombre, departamento_id) VALUES (?, ?, ?)";
 
@@ -42,7 +42,7 @@ public class MunicipioCRUD implements CRUD<Municipio>{
     }
 
     @Override
-    public Municipio obtener(int id) {
+    public Municipio get(int id) {
         String query = "SELECT * FROM municipio WHERE id = ?";
         String nombre = "";
         int departamento_id = 1;
@@ -63,12 +63,12 @@ public class MunicipioCRUD implements CRUD<Municipio>{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        Departamento departamento_asociado = departamento.obtener(departamento_id);
+        Departamento departamento_asociado = departamento.get(departamento_id);
         return new Municipio(id, nombre, departamento_asociado);
     }
 
     @Override
-    public void editar(int id, Municipio municipio) {
+    public void update(int id, Municipio municipio) {
         String query = "UPDATE municipio SET id = ?, nombre = ?, departamento_id = ? WHERE id = ?";
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, municipio.getId());
@@ -84,7 +84,7 @@ public class MunicipioCRUD implements CRUD<Municipio>{
     }
 
     @Override
-    public void eliminar(int id) {
+    public void delete(int id) {
         String query = "DELETE FROM municipio WHERE id = ?";
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, id);

@@ -17,32 +17,32 @@ public class DepartamentoRepositorio implements Repositorio<Departamento> {
 
 
     @Override
-    public void crear(Departamento departamento) {
+    public void create(Departamento departamento) {
         // guarda en base de datos
-        crudDepartamento.crear(departamento);
+        crudDepartamento.create(departamento);
 
         // guarda en archivos
-        departamentosCreados.agregarDepartamento(departamento);
-        departamentosCreados.persistir();
+        departamentosCreados.create(departamento);
     }
 
 
     @Override
-    public Departamento obtener(int id) {
-        return crudDepartamento.obtener(id);
+    public Departamento get(int id) {
+
+        return crudDepartamento.get(id);
     }
 
 
     @Override
-    public void editar(int id, Departamento departamento) {
-        crudDepartamento.editar(id, departamento);
-        departamentosCreados.editarDepartamentoArchivo(id, departamento);
+    public void update(int id, Departamento departamento) {
+        crudDepartamento.update(id, departamento);
+        departamentosCreados.update(id, departamento);
     }
 
 
     @Override
-    public void eliminar(int id) {
-        crudDepartamento.eliminar(id);
-        departamentosCreados.eliminarDepartamentoArchivo(id);
+    public void delete(int id) {
+        crudDepartamento.delete(id);
+        departamentosCreados.delete(id);
     }
 }

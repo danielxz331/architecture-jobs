@@ -15,23 +15,23 @@ public class ProgramaRepositorio implements Repositorio<Programa> {
     ProgramaCRUD programaCRUD = new ProgramaCRUD(connection);
 
     @Override
-    public void crear(Programa programa) {
+    public void create(Programa programa) {
         // guarda en base de datos
-        programaCRUD.crear(programa);
+        programaCRUD.create(programa);
     }
 
     @Override
-    public Programa obtener(int id) {
+    public Programa get(int id) {
         return null;
     }
 
     @Override
-    public void editar(int id, Programa programa) {
+    public void update(int id, Programa programa) {
 
     }
 
     @Override
-    public void eliminar(int id) {
+    public void delete(int id) {
 
     }
 }
