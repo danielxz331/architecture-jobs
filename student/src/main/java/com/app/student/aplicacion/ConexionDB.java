@@ -1,4 +1,4 @@
-package com.app.student.AplicacionSolid;
+package com.app.student.aplicacion;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

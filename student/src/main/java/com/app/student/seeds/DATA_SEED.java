@@ -1,6 +1,6 @@
 package com.app.student.seeds;
 
-import com.app.student.AplicacionSolid.*;
+import com.app.student.aplicacion.*;
 import com.app.student.repositorios.*;
 
 

@@ -1,9 +1,9 @@
-package com.app.student.crudArchivos;
+package com.app.student.repositorios.crud.files;
 
 import java.io.*;
 import java.util.ArrayList;
 
-import com.app.student.AplicacionSolid.Municipio;
+import com.app.student.aplicacion.Municipio;
 import com.app.student.interfaces.VisualizarInformacion;
 
 

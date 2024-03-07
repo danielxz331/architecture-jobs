@@ -1,9 +1,9 @@
-package com.app.student.crud;
+package com.app.student.repositorios.crud.sql;
 
 import com.app.student.interfaces.CRUD;
-import com.app.student.AplicacionSolid.Estudiante;
-import com.app.student.AplicacionSolid.Lugar;
-import com.app.student.AplicacionSolid.Programa;
+import com.app.student.aplicacion.Estudiante;
+import com.app.student.aplicacion.Lugar;
+import com.app.student.aplicacion.Programa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

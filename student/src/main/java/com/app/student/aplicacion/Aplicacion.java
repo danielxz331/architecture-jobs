@@ -1,11 +1,11 @@
-package com.app.student.AplicacionSolid;
+package com.app.student.aplicacion;
 
 import com.app.student.seeds.DATA_SEED;
 /**
  *
  * @author daniel
  */
-public class AplicacionSolid {
+public class Aplicacion {
 
     /**
      * @param args the command line arguments

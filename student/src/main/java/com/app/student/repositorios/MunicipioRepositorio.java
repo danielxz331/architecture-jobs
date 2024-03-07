@@ -1,9 +1,9 @@
 package com.app.student.repositorios;
 
-import com.app.student.AplicacionSolid.ConexionDB;
-import com.app.student.AplicacionSolid.Municipio;
-import com.app.student.crud.MunicipioCRUD;
-import com.app.student.crudArchivos.MunicipiosCreados;
+import com.app.student.aplicacion.ConexionDB;
+import com.app.student.aplicacion.Municipio;
+import com.app.student.repositorios.crud.sql.MunicipioCRUD;
+import com.app.student.repositorios.crud.files.MunicipiosCreados;
 import com.app.student.interfaces.Repositorio;
 import java.sql.Connection;
 

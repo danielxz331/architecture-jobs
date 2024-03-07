@@ -1,4 +1,4 @@
-package com.app.student.crud;
+package com.app.student.repositorios.crud.sql;
 
 /**
  *

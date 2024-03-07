@@ -1,9 +1,9 @@
 package com.app.student.repositorios;
 
-import com.app.student.AplicacionSolid.ConexionDB;
-import com.app.student.AplicacionSolid.Lugar;
-import com.app.student.crud.LugarCRUD;
-import com.app.student.crudArchivos.ListaLugares;
+import com.app.student.aplicacion.ConexionDB;
+import com.app.student.aplicacion.Lugar;
+import com.app.student.repositorios.crud.sql.LugarCRUD;
+import com.app.student.repositorios.crud.files.ListaLugares;
 import com.app.student.interfaces.Repositorio;
 import java.sql.Connection;
 

@@ -7,7 +7,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class StudentApplication {
 
 	public static void main(String[] args) {
-		System.out.println("Hello World");
+		SpringApplication.run(StudentApplication.class, args);
 	}
+
+//	@Bean
+//	public WebMvcConfigurer corsConfigurer() {
+//		return new WebMvcConfigurer() {
+//			@Override
+//			public void addCorsMappings(CorsRegistry registry) {
+//				registry.addMapping("/**").allowedOrigins("*").allowedMethods("*").allowedHeaders("*");
+//			}
+//		};
+//	}
 
 }
