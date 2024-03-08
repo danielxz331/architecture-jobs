@@ -10,6 +10,8 @@ public class Departamento {
 
     private String nombre;
 
+    public Departamento() {}
+
     public Departamento(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
