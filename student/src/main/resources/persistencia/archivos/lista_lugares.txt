@@ -1,0 +1,5 @@
+Lugar{id=1, direccion=Universidad de la Sabana, departamento=1, municipio=1}
+Lugar{id=2, direccion=Universidad de la Sabana, departamento=1, municipio=2}
+Lugar{id=3, direccion=Universidad de Boyaca, departamento=2, municipio=3}
+Lugar{id=4, direccion=Universidad de Boyaca, departamento=2, municipio=4}
+Lugar{id=5, direccion=Universidad de los Llanos, departamento=2, municipio=4}

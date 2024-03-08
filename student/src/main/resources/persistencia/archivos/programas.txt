@@ -1,0 +1,4 @@
+Programa{id=1, nombre=Ingenieria de Sistemas, semestres=10, direccion=1}
+Programa{id=2, nombre=Ingenieria Electronica, semestres=10, direccion=2}
+Programa{id=3, nombre=Ingenieria de Procesos, semestres=10, direccion=3}
+Programa{id=4, nombre=Ingenieria de Sistemas, semestres=10, direccion=4}

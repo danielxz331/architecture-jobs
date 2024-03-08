@@ -35,7 +35,7 @@ public class DepartamentoRepositorio implements Repositorio<Departamento> {
 
     @Override
     public List<Departamento> getAll() {
-        return departamentosCreados.getAll();
+        return crudDepartamento.getAll();
     }
 
 

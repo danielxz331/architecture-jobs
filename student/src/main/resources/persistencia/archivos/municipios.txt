@@ -1,0 +1,4 @@
+Municipio{id=1, nombre=Bogota, departamento=1}
+Municipio{id=2, nombre=Chia, departamento=1}
+Municipio{id=3, nombre=Tunja, departamento=2}
+Municipio{id=4, nombre=Duitamita, departamento=2}

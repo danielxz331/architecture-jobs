@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.app.student.aplicacion.Estudiante;
 import com.app.student.aplicacion.Lugar;
 import com.app.student.interfaces.VisualizarInformacion;
 import com.app.student.interfaces.CRUD;
@@ -110,6 +111,36 @@ public class ListaLugares implements VisualizarInformacion, CRUD<Lugar>{
 
     @Override
     public List<Lugar> getAll() {
+        try {
+
+            String lineaLeida = "";
+
+            List<Lugar> list = new ArrayList();
+
+            if (archivo.exists()) {
+                BufferedReader archivoLeer = new BufferedReader(new FileReader(archivo));
+
+                while ((lineaLeida = archivoLeer.readLine()) != null) {
+                    String[] partes = lineaLeida.split(",");
+                    String idStr = partes[0].split("=")[1].replaceAll("\\D+", "");
+                    int id = Integer.parseInt(idStr);
+                    String direccion = partes[1].split("=")[1];
+                    String idDepartamentoStr = partes[2].split("=")[1].replaceAll("\\D+", "");
+                    int idDepartamento = Integer.parseInt(idDepartamentoStr);
+                    String municipioIdStr = partes[3].split("=")[1].replaceAll("\\D+", "");
+                    int municipioId = Integer.parseInt(municipioIdStr);
+
+                    list.add(new Lugar(id, direccion, idDepartamento, municipioId));
+                }
+
+                archivoLeer.close();
+                return list;
+            } else {
+                System.out.println("No encuentra el archivo");
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
         return null;
     }
 

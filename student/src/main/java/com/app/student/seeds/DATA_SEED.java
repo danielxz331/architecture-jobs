@@ -113,6 +113,10 @@ public class DATA_SEED {
         System.out.println(estudianteRepositorio.get(estudiante1.getId()));
 
         System.out.println(departamentoRepositorio.getAll());
+        System.out.println(estudianteRepositorio.getAll());
+        System.out.println(lugarRepositorio.getAll());
+        System.out.println(municipioRepositorio.getAll());
+        System.out.println(programaRepositorio.getAll());
 
     }
 

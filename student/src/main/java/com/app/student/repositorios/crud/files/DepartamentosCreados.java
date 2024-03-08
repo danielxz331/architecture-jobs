@@ -125,7 +125,7 @@ public class DepartamentosCreados implements VisualizarInformacion, CRUD<Departa
                     String[] partes = lineaLeida.split(",");
                     String idString = partes[0].split("=")[1].replaceAll("\\D+", "");
                     int idParte = Integer.parseInt(idString);
-                    String nombreParte = partes[1].split("=")[1];
+                    String nombreParte = partes[1].split("=")[1].replaceAll("\\D+", "");
                     list.add(new Departamento(idParte, nombreParte));
                 }
 

@@ -32,7 +32,7 @@ public class MunicipioRepositorio implements Repositorio<Municipio>{
 
     @Override
     public List<Municipio> getAll() {
-        return municipiosCreados.getAll();
+        return municipioCRUD.getAll();
     }
 
     @Override

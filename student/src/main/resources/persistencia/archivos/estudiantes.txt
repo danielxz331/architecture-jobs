@@ -1,0 +1,9 @@
+Estudiante{id=1, apellidos=Martinez MT09, nombres=Daniel Stiven, codigo=160004400, programa=1, direccion=1}
+Estudiante{id=2, apellidos=Egan Roldan, nombres=Roger Roger, codigo=160004401, programa=2, direccion=2}
+Estudiante{id=3, apellidos=Varon Ducu, nombres=Rulitos Felipe, codigo=160004402, programa=3, direccion=3}
+Estudiante{id=4, apellidos=Amortegui Matador, nombres=Juan Lopez, codigo=160004403, programa=4, direccion=4}
+Estudiante{id=5, apellidos=La Asprilla, nombres=Abelardo De, codigo=160004404, programa=1, direccion=1}
+Estudiante{id=6, apellidos=Bocanegra, nombres=Carlitos, codigo=160004405, programa=2, direccion=2}
+Estudiante{id=8, apellidos=Perez, nombres=Chamito, codigo=160004407, programa=4, direccion=4}
+Estudiante{id=9, apellidos=Perez, nombres=Pedro, codigo=160004408, programa=1, direccion=1}
+Estudiante{id=10, apellidos=Porras, nombres=Manuela, codigo=160004409, programa=2, direccion=2}

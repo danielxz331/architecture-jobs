@@ -34,7 +34,7 @@ public class EstudianteRepositorio implements Repositorio<Estudiante>{
 
     @Override
     public List<Estudiante> getAll() {
-        return estudianteInscritos.getAll();
+        return crudEstudiante.getAll();
     }
 
 

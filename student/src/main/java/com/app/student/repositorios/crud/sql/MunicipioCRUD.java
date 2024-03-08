@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -70,9 +71,24 @@ public class MunicipioCRUD implements CRUD<Municipio>{
 
     @Override
     public List<Municipio> getAll() {
+        String query = "SELECT * FROM municipio";
+        List<Municipio> list = new ArrayList();
+        try (PreparedStatement statement = conexion.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                list.add(new Municipio(
+                        resultSet.getInt("id"),
+                        resultSet.getString("nombre"),
+                        resultSet.getInt("departamento_id")
+                ));
+            }
+            return list;
+        } catch (SQLException e) {
+            System.out.println("Error al obtener los Municipios.");
+            e.printStackTrace();
+        }
         return null;
     }
-
     @Override
     public void update(int id, Municipio municipio) {
         String query = "UPDATE municipio SET id = ?, nombre = ?, departamento_id = ? WHERE id = ?";

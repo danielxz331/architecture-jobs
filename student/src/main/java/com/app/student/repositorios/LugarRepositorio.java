@@ -32,7 +32,7 @@ public class LugarRepositorio implements Repositorio<Lugar>{
 
     @Override
     public List<Lugar> getAll() {
-        return listaLugares.getAll();
+        return lugarCRUD.getAll();
     }
 
     @Override

@@ -31,7 +31,7 @@ public class ProgramaRepositorio implements Repositorio<Programa> {
 
     @Override
     public List<Programa> getAll() {
-        return programasCreados.getAll();
+        return programaCRUD.getAll();
     }
 
     @Override

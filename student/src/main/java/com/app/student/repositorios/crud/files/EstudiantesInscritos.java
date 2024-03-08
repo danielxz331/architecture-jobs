@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.app.student.aplicacion.Departamento;
 import com.app.student.aplicacion.Estudiante;
 import com.app.student.interfaces.VisualizarInformacion;
 import com.app.student.interfaces.CRUD;
@@ -111,6 +112,38 @@ public class EstudiantesInscritos implements VisualizarInformacion, CRUD<Estudia
 
     @Override
     public List<Estudiante> getAll() {
+        try {
+
+            String lineaLeida = "";
+
+            List<Estudiante> list = new ArrayList();
+
+            if (archivo.exists()) {
+                BufferedReader archivoLeer = new BufferedReader(new FileReader(archivo));
+
+                while ((lineaLeida = archivoLeer.readLine()) != null) {
+                    String[] partes = lineaLeida.split(",");
+                    String idString = partes[0].split("=")[1].replaceAll("\\D+", "");
+                    int idParte = Integer.parseInt(idString);
+                    String nombresParte = partes[1].split("=")[1];
+                    String apellidosParte = partes[2].split("=")[1];
+                    String codigoString = partes[3].split("=")[1].replaceAll("\\D+", "");
+                    int codigoParte = Integer.parseInt(codigoString);
+                    String idProgramaStr = partes[3].split("=")[1].replaceAll("\\D+", "");
+                    int programaidParte = Integer.parseInt(idProgramaStr);
+                    String idDireccionStr = partes[4].split("=")[1].replaceAll("\\D+", "");
+                    int direccionIdParte = Integer.parseInt(idDireccionStr);
+                    list.add(new Estudiante(nombresParte, apellidosParte, idParte, codigoParte, programaidParte, direccionIdParte));
+                }
+
+                archivoLeer.close();
+                return list;
+            } else {
+                System.out.println("No encuentra el archivo");
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
         return null;
     }
 

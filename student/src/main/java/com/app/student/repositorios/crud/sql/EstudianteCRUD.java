@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -77,9 +78,26 @@ public class EstudianteCRUD implements CRUD<Estudiante>{
 
     @Override
     public List<Estudiante> getAll() {
+        String query = "SELECT * FROM estudiante";
+        List<Estudiante> Lista = new ArrayList();
+        try (PreparedStatement statement = conexion.prepareStatement(query)) {
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nombres = resultSet.getString("nombres");
+                String apellidos = resultSet.getString("apellidos");
+                int codigo = resultSet.getInt("codigo");
+                int programa_id = resultSet.getInt("programa_id");
+                int lugar_id = resultSet.getInt("lugar_id");
+                Lista.add(new Estudiante(nombres, apellidos, id, codigo, programa_id, lugar_id));
+            }
+            return Lista;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
-
     @Override
     public void update(int id, Estudiante estudiante) {
         String query = "UPDATE estudiante SET id = ?, nombres = ?, apellidos = ?, codigo = ?, programa_id = ?, lugar_id = ? WHERE id = ?";

@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.app.student.aplicacion.Departamento;
 import com.app.student.aplicacion.Estudiante;
 import com.app.student.aplicacion.Programa;
 import com.app.student.interfaces.VisualizarInformacion;
@@ -72,6 +73,36 @@ public class ProgramasCreados implements VisualizarInformacion, CRUD<Programa>{
 
     @Override
     public List<Programa> getAll() {
+        try {
+
+            String lineaLeida = "";
+
+            List<Programa> list = new ArrayList();
+
+            if (archivo.exists()) {
+                BufferedReader archivoLeer = new BufferedReader(new FileReader(archivo));
+
+                while ((lineaLeida = archivoLeer.readLine()) != null) {
+                    String[] partes = lineaLeida.split(",");
+                    String idProgramaStr = partes[0].split("=")[1].replaceAll("\\D+", "");
+                    int idPrograma = Integer.parseInt(idProgramaStr);
+                    String nombre = partes[1].split("=")[1];
+                    String semestresStr = partes[2].split("=")[1].replaceAll("\\D+", "");
+                    int semestres = Integer.parseInt(semestresStr);
+                    String idDireccionStr = partes[3].split("=")[1].replaceAll("\\D+", "");
+                    int direccion = Integer.parseInt(idDireccionStr);
+
+                    list.add(new Programa(idPrograma, nombre, semestres, direccion));
+                }
+
+                archivoLeer.close();
+                return list;
+            } else {
+                System.out.println("No encuentra el archivo");
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
         return null;
     }
 
