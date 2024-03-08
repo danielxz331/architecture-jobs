@@ -2,6 +2,7 @@ package com.app.student.repositorios.crud.files;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.app.student.aplicacion.Departamento;
 import com.app.student.interfaces.VisualizarInformacion;
@@ -81,7 +82,7 @@ public class DepartamentosCreados implements VisualizarInformacion, CRUD<Departa
     }
 
     @Override
-    public Departamento get(int id) {
+    public Departamento getById(int id) {
         try {
 
             String lineaLeida = "";
@@ -92,13 +93,44 @@ public class DepartamentosCreados implements VisualizarInformacion, CRUD<Departa
                 while ((lineaLeida = archivoLeer.readLine()) != null) {
                     if (lineaLeida.contains("Departamento"+"{id="+id)) {
                         String[] partes = lineaLeida.split(",");
-                        String[] idParte = partes[0].split("=");
-                        String[] nombreParte = partes[1].split("=");
-                        return new Departamento(Integer.parseInt(idParte[1]), nombreParte[1]);
+                        String idString = partes[0].split("=")[1].replaceAll("\\D+", "");
+                        int idParte = Integer.parseInt(idString);
+                        String nombreParte = partes[1].split("=")[1];
+                        return new Departamento(idParte, nombreParte);
                     }
                 }
 
                 archivoLeer.close();
+            } else {
+                System.out.println("No encuentra el archivo");
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public List<Departamento> getAll() {
+        try {
+
+            String lineaLeida = "";
+
+            List<Departamento> list = new ArrayList();
+
+            if (archivo.exists()) {
+                BufferedReader archivoLeer = new BufferedReader(new FileReader(archivo));
+
+                while ((lineaLeida = archivoLeer.readLine()) != null) {
+                    String[] partes = lineaLeida.split(",");
+                    String idString = partes[0].split("=")[1].replaceAll("\\D+", "");
+                    int idParte = Integer.parseInt(idString);
+                    String nombreParte = partes[1].split("=")[1];
+                    list.add(new Departamento(idParte, nombreParte));
+                }
+
+                archivoLeer.close();
+                return list;
             } else {
                 System.out.println("No encuentra el archivo");
             }

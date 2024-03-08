@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -27,7 +28,7 @@ public class ProgramaCRUD implements CRUD<Programa>{
             statement.setInt(1, programa.getId());
             statement.setString(2, programa.getNombre());
             statement.setInt(3, programa.getSemestres());
-            statement.setInt(4, programa.getDireccion().getId());
+            statement.setInt(4, programa.getDireccion());
             statement.executeUpdate();
             System.out.println("Programa creado con éxito.");
         } catch (SQLException e) {
@@ -37,7 +38,7 @@ public class ProgramaCRUD implements CRUD<Programa>{
     }
 
     @Override
-    public Programa get(int id) {
+    public Programa getById(int id) {
         String query = "SELECT * FROM programa WHERE id = ?";
         String nombre = "";
         int semestre = 1;
@@ -63,8 +64,12 @@ public class ProgramaCRUD implements CRUD<Programa>{
             e.printStackTrace();
         }
 
-        Lugar lugar_asociado = lugarCRUD.get(lugar_id);
-        return new Programa(id, nombre, semestre, lugar_asociado);
+        return new Programa(id, nombre, semestre, lugar_id);
+    }
+
+    @Override
+    public List<Programa> getAll() {
+        return null;
     }
 
     @Override
@@ -74,7 +79,7 @@ public class ProgramaCRUD implements CRUD<Programa>{
             statement.setInt(1, programa.getId());
             statement.setString(2, programa.getNombre());
             statement.setInt(3, programa.getSemestres());
-            statement.setInt(4, programa.getDireccion().getId());
+            statement.setInt(4, programa.getDireccion());
             statement.setInt(5, id);
             statement.executeUpdate();
             System.out.println("Programa editado con éxito.");

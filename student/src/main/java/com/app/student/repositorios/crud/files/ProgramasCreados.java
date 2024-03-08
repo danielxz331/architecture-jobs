@@ -5,60 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.app.student.aplicacion.Estudiante;
+import com.app.student.aplicacion.Programa;
 import com.app.student.interfaces.VisualizarInformacion;
 import com.app.student.interfaces.CRUD;
+public class ProgramasCreados implements VisualizarInformacion, CRUD<Programa>{
 
-/**
- *
- * @author daniel
- */
-public class EstudiantesInscritos implements VisualizarInformacion, CRUD<Estudiante>{
-
-    String pathProyecto = System.getProperty("user.dir"); // Obtiene el directorio actual del proyecto
-    String rutaArchivo = pathProyecto + "/src/main/resources/persistencia/archivos/estudiantes.txt";
+    String pathProyecto = System.getProperty("user.dir");
+    String rutaArchivo = pathProyecto + "/src/main/resources/persistencia/archivos/programas.txt";
 
     private File archivo = new File(rutaArchivo);
 
-    private ArrayList<Estudiante> listado = new ArrayList();
+    private ArrayList<Programa> listado = new ArrayList();
 
-    public String recorrerLista(ArrayList<Estudiante> lista)
-    {
-        String objetos = "";
-
-        for (Estudiante estudiante : lista) {
-
-            objetos += estudiante.toString()+"\r\n";
-        }
-
-        return objetos;
-    }
 
     @Override
-    public String nombreClase() {
-        return "EstudiantesInscritos";
-    }
-
-    @Override
-    public String informacionObjeto() {
-        String objetos = this.recorrerLista(listado);
-
-        return objetos;
-    }
-
-    @Override
-    public void persistir()
-    {
-        for (Estudiante estudiante : this.listado) {
-
-            this.create(estudiante);
-
-        }
-
-        this.listado.clear();
-    }
-
-    @Override
-    public void create(Estudiante estudiante) {
+    public void create(Programa programa) {
         try {
 
             if (archivo.exists()) {
@@ -67,11 +28,11 @@ public class EstudiantesInscritos implements VisualizarInformacion, CRUD<Estudia
 
             BufferedWriter archivoEscribir = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo, true), "utf-8"));
 
-            archivoEscribir.write(estudiante.toString()+"\r\n");
+            archivoEscribir.write(programa.toString()+"\r\n");
 
             archivoEscribir.close();
 
-            System.out.println("Estudiante agregado correctamente");
+            System.out.println("Programa agregado correctamente");
 
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
@@ -79,24 +40,24 @@ public class EstudiantesInscritos implements VisualizarInformacion, CRUD<Estudia
     }
 
     @Override
-    public Estudiante getById(int id) {
+    public Programa getById(int id) {
         try {
             BufferedReader archivoLeer = new BufferedReader(new InputStreamReader(new FileInputStream(archivo), "utf-8"));
 
             String lineaLeida;
             while ((lineaLeida = archivoLeer.readLine()) != null) {
-                if (lineaLeida.contains("Estudiante"+"{id="+id)) {
+                if (lineaLeida.contains("Programa"+"{id="+id)) {
                     System.out.println(lineaLeida);
                     String[] partes = lineaLeida.split(",");
-                    int idParte = Integer.parseInt(partes[0].split("=")[1]);
-                    String nombresParte = partes[1].split("=")[1];
-                    String apellidosParte = partes[2].split("=")[1];
-                    int codigoParte = Integer.parseInt(partes[3].split("=")[1]);
-                    String idProgramaStr = partes[3].split("=")[1].replaceAll("\\D+", "");
-                    int programaidParte = Integer.parseInt(idProgramaStr);
-                    String idDireccionStr = partes[4].split("=")[1].replaceAll("\\D+", "");
-                    int direccionIdParte = Integer.parseInt(idDireccionStr);
-                    return new Estudiante(nombresParte, apellidosParte, idParte, codigoParte, programaidParte, direccionIdParte);
+                    String idProgramaStr = partes[0].split("=")[1].replaceAll("\\D+", "");
+                    int idPrograma = Integer.parseInt(idProgramaStr);
+                    String nombre = partes[1].split("=")[1];
+                    String semestresStr = partes[2].split("=")[1].replaceAll("\\D+", "");
+                    int semestres = Integer.parseInt(semestresStr);
+                    String idDireccionStr = partes[3].split("=")[1].replaceAll("\\D+", "");
+                    int direccion = Integer.parseInt(idDireccionStr);
+
+                    return new Programa(idPrograma, nombre, semestres, direccion);
                 }
             }
 
@@ -110,20 +71,20 @@ public class EstudiantesInscritos implements VisualizarInformacion, CRUD<Estudia
     }
 
     @Override
-    public List<Estudiante> getAll() {
+    public List<Programa> getAll() {
         return null;
     }
 
     @Override
-    public void update(int id, Estudiante estudiante) {
+    public void update(int id, Programa programa) {
         try {
             BufferedReader archivoLeer = new BufferedReader(new InputStreamReader(new FileInputStream(archivo), "utf-8"));
             StringBuilder contenidoArchivo = new StringBuilder();
 
             String lineaLeida;
             while ((lineaLeida = archivoLeer.readLine()) != null) {
-                if (lineaLeida.contains("Estudiante"+"{id="+id)) {
-                    lineaLeida = estudiante.toString();
+                if (lineaLeida.contains("Programa"+"{id="+id)) {
+                    lineaLeida = programa.toString();
                 }
                 contenidoArchivo.append(lineaLeida).append("\r\n");
             }
@@ -147,9 +108,9 @@ public class EstudiantesInscritos implements VisualizarInformacion, CRUD<Estudia
 
             String lineaLeida;
             while ((lineaLeida = archivoLeer.readLine()) != null) {
-                if (lineaLeida.contains("Estudiante"+"{id=" + id)) {
+                if (lineaLeida.contains("Programa"+"{id=" + id)) {
                     System.out.println(lineaLeida);
-                    System.out.println("Estudiante eliminado correctamente");
+                    System.out.println("Programa eliminado correctamente");
                 }
                 else {
                     contenidoArchivo.append(lineaLeida).append("\r\n");
@@ -165,5 +126,40 @@ public class EstudiantesInscritos implements VisualizarInformacion, CRUD<Estudia
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
+    }
+
+    @Override
+    public String nombreClase() {
+        return "ProgramasCreados";
+    }
+
+    @Override
+    public String informacionObjeto() {
+        String objetos = this.recorrerLista(listado);
+
+        return objetos;
+    }
+
+    @Override
+    public void persistir() {
+        for (Programa programa : this.listado) {
+
+            this.create(programa);
+
+        }
+
+        this.listado.clear();
+    }
+
+    public String recorrerLista(ArrayList<Programa> lista)
+    {
+        String objetos = "";
+
+        for (Programa programa : lista) {
+
+            objetos += programa.toString()+"\r\n";
+        }
+
+        return objetos;
     }
 }

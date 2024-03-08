@@ -6,6 +6,7 @@ import com.app.student.repositorios.crud.sql.DepartamentoCRUD;
 import com.app.student.repositorios.crud.files.DepartamentosCreados;
 import com.app.student.interfaces.Repositorio;
 import java.sql.Connection;
+import java.util.List;
 
 public class DepartamentoRepositorio implements Repositorio<Departamento> {
 
@@ -29,7 +30,12 @@ public class DepartamentoRepositorio implements Repositorio<Departamento> {
     @Override
     public Departamento get(int id) {
 
-        return crudDepartamento.get(id);
+        return crudDepartamento.getById(id);
+    }
+
+    @Override
+    public List<Departamento> getAll() {
+        return departamentosCreados.getAll();
     }
 
 

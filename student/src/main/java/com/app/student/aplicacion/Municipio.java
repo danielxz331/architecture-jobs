@@ -10,12 +10,12 @@ public class Municipio {
 
     private String nombre;
 
-    private Departamento departamento;
+    private int departamentoId;
 
-    public Municipio(int id, String nombre, Departamento departamento) {
+    public Municipio(int id, String nombre, int departamentoId) {
         this.id = id;
         this.nombre = nombre;
-        this.departamento = departamento;
+        this.departamentoId = departamentoId;
     }
 
     public int getId() {
@@ -34,17 +34,17 @@ public class Municipio {
         this.nombre = nombre;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
+    public int getDepartamento() {
+        return departamentoId;
     }
 
     public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
+        this.departamentoId = departamentoId;
     }
 
     @Override
     public String toString() {
-        return "Municipio{" + "id=" + id + ", nombre=" + nombre + ", departamento=" + departamento.toString() + '}';
+        return "Municipio{" + "id=" + id + ", nombre=" + nombre + ", departamento=" + departamentoId + '}';
     }
 
 }

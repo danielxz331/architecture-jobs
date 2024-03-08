@@ -6,6 +6,7 @@ import com.app.student.repositorios.crud.sql.EstudianteCRUD;
 import com.app.student.repositorios.crud.files.EstudiantesInscritos;
 import com.app.student.interfaces.Repositorio;
 import java.sql.Connection;
+import java.util.List;
 
 public class EstudianteRepositorio implements Repositorio<Estudiante>{
 
@@ -28,7 +29,12 @@ public class EstudianteRepositorio implements Repositorio<Estudiante>{
 
     @Override
     public Estudiante get(int id) {
-        return crudEstudiante.get(id);
+        return estudianteInscritos.getById(id);
+    }
+
+    @Override
+    public List<Estudiante> getAll() {
+        return estudianteInscritos.getAll();
     }
 
 

@@ -6,6 +6,7 @@ import com.app.student.repositorios.crud.sql.LugarCRUD;
 import com.app.student.repositorios.crud.files.ListaLugares;
 import com.app.student.interfaces.Repositorio;
 import java.sql.Connection;
+import java.util.List;
 
 public class LugarRepositorio implements Repositorio<Lugar>{
 
@@ -26,7 +27,12 @@ public class LugarRepositorio implements Repositorio<Lugar>{
 
     @Override
     public Lugar get(int id) {
-        return lugarCRUD.get(id);
+        return listaLugares.getById(id);
+    }
+
+    @Override
+    public List<Lugar> getAll() {
+        return listaLugares.getAll();
     }
 
     @Override

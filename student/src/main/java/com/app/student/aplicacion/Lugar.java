@@ -10,15 +10,15 @@ public class Lugar {
 
     private String direccion;
 
-    private Departamento departamento;
+    private int departamentoId;
 
-    private Municipio municipio;
+    private int municipioId;
 
-    public Lugar(int id, String direccion, Departamento departamento, Municipio municipio) {
+    public Lugar(int id, String direccion, int departamentoId, int municipioId) {
         this.id = id;
         this.direccion = direccion;
-        this.departamento = departamento;
-        this.municipio = municipio;
+        this.departamentoId = departamentoId;
+        this.municipioId = municipioId;
     }
 
     public int getId() {
@@ -37,26 +37,26 @@ public class Lugar {
         this.direccion = direccion;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
+    public int getDepartamento() {
+        return departamentoId;
     }
 
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
+    public void setDepartamento(int departamento) {
+        this.departamentoId = departamento;
     }
 
-    public Municipio getMunicipio() {
-        return municipio;
+    public int getMunicipio() {
+        return municipioId;
     }
 
-    public void setMunicipio(Municipio municipio) {
-        this.municipio = municipio;
+    public void setMunicipio(int municipioId) {
+        this.municipioId = municipioId;
     }
 
 
     @Override
     public String toString() {
-        return "Lugar{" + "id=" + id + ", direccion=" + direccion + ", departamento=" + departamento + ", municipio=" + municipio + '}';
+        return "Lugar{" + "id=" + id + ", direccion=" + direccion + ", departamento=" + departamentoId + ", municipio=" + municipioId + '}';
     }
 
 }

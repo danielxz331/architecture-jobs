@@ -1,5 +1,0 @@
-Lugar{id=1, direccion=Universidad de la Sabana, departamento=Departamento{id=1, nombre=Cundinamarca}, municipio=Municipio{id=1, nombre=Bogota, departamento=Departamento{id=1, nombre=Cundinamarca}}}
-Lugar{id=2, direccion=Universidad de la Sabana, departamento=Departamento{id=1, nombre=Cundinamarca}, municipio=Municipio{id=2, nombre=Chia, departamento=Departamento{id=1, nombre=Cundinamarca}}}
-Lugar{id=3, direccion=Universidad de Boyaca, departamento=Departamento{id=2, nombre=Boyaca}, municipio=Municipio{id=3, nombre=Tunja, departamento=Departamento{id=2, nombre=Boyaca}}}
-Lugar{id=4, direccion=Universidad de Boyaca, departamento=Departamento{id=2, nombre=Boyaca}, municipio=Municipio{id=4, nombre=Duitama, departamento=Departamento{id=2, nombre=Boyaca}}}
-Lugar{id=5, direccion=Universidad de los Llanos, departamento=Departamento{id=2, nombre=Boyaca}, municipio=Municipio{id=4, nombre=Duitama, departamento=Departamento{id=2, nombre=Boyaca}}}

@@ -2,6 +2,7 @@ package com.app.student.repositorios.crud.files;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.app.student.aplicacion.Lugar;
 import com.app.student.interfaces.VisualizarInformacion;
@@ -80,20 +81,21 @@ public class ListaLugares implements VisualizarInformacion, CRUD<Lugar>{
     }
 
     @Override
-    public Lugar get(int id) {
+    public Lugar getById(int id) {
         try {
             BufferedReader archivoLeer = new BufferedReader(new InputStreamReader(new FileInputStream(archivo), "utf-8"));
 
             String lineaLeida;
             while ((lineaLeida = archivoLeer.readLine()) != null) {
                 if (lineaLeida.contains("Lugar"+"{id="+id)) {
-                    System.out.println(lineaLeida);
                     String[] partes = lineaLeida.split(",");
                     String direccion = partes[1].split("=")[1];
-                    int idDepartamento = Integer.parseInt(partes[2].split("=")[1]);
-                    int idMunicipio = Integer.parseInt(partes[3].split("=")[1]);
+                    String idDepartamentoStr = partes[2].split("=")[1].replaceAll("\\D+", "");
+                    int idDepartamento = Integer.parseInt(idDepartamentoStr);
+                    String municipioIdStr = partes[3].split("=")[1].replaceAll("\\D+", "");
+                    int municipioId = Integer.parseInt(municipioIdStr);
 
-                    return new Lugar(id, direccion, null, null);
+                    return new Lugar(id, direccion, idDepartamento, municipioId);
                 }
             }
 
@@ -107,6 +109,11 @@ public class ListaLugares implements VisualizarInformacion, CRUD<Lugar>{
     }
 
     @Override
+    public List<Lugar> getAll() {
+        return null;
+    }
+
+    @Override
     public void update(int id, Lugar lugar) {
         try {
             BufferedReader archivoLeer = new BufferedReader(new InputStreamReader(new FileInputStream(archivo), "utf-8"));
@@ -115,7 +122,6 @@ public class ListaLugares implements VisualizarInformacion, CRUD<Lugar>{
             String lineaLeida;
             while ((lineaLeida = archivoLeer.readLine()) != null) {
                 if (lineaLeida.contains("Lugar"+"{id="+id)) {
-                    System.out.println(lineaLeida);
                     contenidoArchivo.append(lugar.toString()).append("\r\n");
                 }
                 else {
@@ -143,7 +149,6 @@ public class ListaLugares implements VisualizarInformacion, CRUD<Lugar>{
             String lineaLeida;
             while ((lineaLeida = archivoLeer.readLine()) != null) {
                 if (lineaLeida.contains("Lugar"+"{id="+id)) {
-                    System.out.println(lineaLeida);
                     System.out.println("Lugar eliminado correctamente");
                 }
                 else {

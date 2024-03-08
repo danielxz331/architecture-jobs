@@ -12,13 +12,13 @@ public class Programa {
 
     private int semestres;
 
-    private Lugar direccion;
+    private int direccionId;
 
-    public Programa(int id, String nombre, int semestres, Lugar direccion) {
+    public Programa(int id, String nombre, int semestres, int direccionId) {
         this.id = id;
         this.nombre = nombre;
         this.semestres = semestres;
-        this.direccion = direccion;
+        this.direccionId = direccionId;
     }
 
     public int getId() {
@@ -45,12 +45,16 @@ public class Programa {
         this.semestres = semestres;
     }
 
-    public Lugar getDireccion() {
-        return direccion;
+    public int getDireccion() {
+        return direccionId;
     }
 
-    public void setDireccion(Lugar direccion) {
-        this.direccion = direccion;
+    public void setDireccion(int direccionId) {
+        this.direccionId = direccionId;
     }
 
+    @Override
+    public String toString() {
+        return "Programa{" + "id=" + id + ", nombre=" + nombre + ", semestres=" + semestres + ", direccion=" + direccionId + '}';
+    }
 }

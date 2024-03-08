@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -29,8 +30,8 @@ public class EstudianteCRUD implements CRUD<Estudiante>{
             statement.setString(2, estudiante.getNombres());
             statement.setString(3, estudiante.getApellidos());
             statement.setDouble(4, estudiante.getCodigo());
-            statement.setInt(5, estudiante.getPrograma().getId());
-            statement.setInt(6, estudiante.getDireccion().getId());
+            statement.setInt(5, estudiante.getPrograma());
+            statement.setInt(6, estudiante.getDireccion());
             statement.executeUpdate();
             System.out.println("Estudiante creado con éxito.");
         } catch (SQLException e) {
@@ -40,7 +41,7 @@ public class EstudianteCRUD implements CRUD<Estudiante>{
     }
 
     @Override
-    public Estudiante get(int id) {
+    public Estudiante getById(int id) {
         String query = "SELECT * FROM estudiante WHERE id = ?";
         String nombres = "";
         String apellidos = "";
@@ -71,10 +72,12 @@ public class EstudianteCRUD implements CRUD<Estudiante>{
             e.printStackTrace();
         }
 
-        Programa programa_asociado = programaCRUD.get(programa_id);
-        Lugar lugar_asociado = lugarCRUD.get(lugar_id);
+        return new Estudiante(nombres, apellidos, id, codigo, programa_id, lugar_id);
+    }
 
-        return new Estudiante(nombres, apellidos, id, codigo, programa_asociado, lugar_asociado);
+    @Override
+    public List<Estudiante> getAll() {
+        return null;
     }
 
     @Override
@@ -85,8 +88,8 @@ public class EstudianteCRUD implements CRUD<Estudiante>{
             statement.setString(2, estudiante.getNombres());
             statement.setString(3, estudiante.getApellidos());
             statement.setDouble(4, estudiante.getCodigo());
-            statement.setInt(5, estudiante.getPrograma().getId());
-            statement.setInt(6, estudiante.getDireccion().getId());
+            statement.setInt(5, estudiante.getPrograma());
+            statement.setInt(6, estudiante.getDireccion());
             statement.setInt(7, id);
             statement.executeUpdate();
             System.out.println("Estudiante editado con éxito.");

@@ -2,6 +2,7 @@ package com.app.student.repositorios.crud.files;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.app.student.aplicacion.Municipio;
 import com.app.student.interfaces.VisualizarInformacion;
@@ -77,7 +78,7 @@ public class MunicipiosCreados implements VisualizarInformacion, CRUD<Municipio>
     }
 
     @Override
-    public Municipio get(int id) {
+    public Municipio getById(int id) {
         try {
 
             String lineaLeida = "";
@@ -87,11 +88,11 @@ public class MunicipiosCreados implements VisualizarInformacion, CRUD<Municipio>
 
                 while ((lineaLeida = archivoLeer.readLine()) != null) {
                     if (lineaLeida.contains("Municipio"+"{id="+id)) {
-                        System.out.println(lineaLeida);
                         String[] partes = lineaLeida.split(",");
                         String nombre = partes[1].split("=")[1];
-                        String idDepartamento = partes[2].split("=")[1];
-                        return new Municipio(id, nombre, null);
+                        String idDepartamentoStr = partes[2].split("=")[1].replaceAll("\\D+", "");
+                        int idDepartamento = Integer.parseInt(idDepartamentoStr);
+                        return new Municipio(id, nombre, idDepartamento);
                     }
                 }
 
@@ -102,6 +103,11 @@ public class MunicipiosCreados implements VisualizarInformacion, CRUD<Municipio>
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
+        return null;
+    }
+
+    @Override
+    public List<Municipio> getAll() {
         return null;
     }
 

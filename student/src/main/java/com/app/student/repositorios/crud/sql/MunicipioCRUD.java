@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -29,7 +30,7 @@ public class MunicipioCRUD implements CRUD<Municipio>{
 
             statement.setInt(1, municipio.getId());
             statement.setString(2, municipio.getNombre());
-            statement.setInt(3, municipio.getDepartamento().getId());
+            statement.setInt(3, municipio.getDepartamento());
             statement.executeUpdate();
             System.out.println("Municipio creado con éxito.");
 
@@ -42,7 +43,7 @@ public class MunicipioCRUD implements CRUD<Municipio>{
     }
 
     @Override
-    public Municipio get(int id) {
+     public Municipio getById(int id) {
         String query = "SELECT * FROM municipio WHERE id = ?";
         String nombre = "";
         int departamento_id = 1;
@@ -63,8 +64,13 @@ public class MunicipioCRUD implements CRUD<Municipio>{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        Departamento departamento_asociado = departamento.get(departamento_id);
-        return new Municipio(id, nombre, departamento_asociado);
+
+        return new Municipio(id, nombre, departamento_id);
+    }
+
+    @Override
+    public List<Municipio> getAll() {
+        return null;
     }
 
     @Override
@@ -73,7 +79,7 @@ public class MunicipioCRUD implements CRUD<Municipio>{
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, municipio.getId());
             statement.setString(2, municipio.getNombre());
-            statement.setInt(3, municipio.getDepartamento().getId());
+            statement.setInt(3, municipio.getDepartamento());
             statement.setInt(4, id);
             statement.executeUpdate();
             System.out.println("Municipio editado con éxito.");

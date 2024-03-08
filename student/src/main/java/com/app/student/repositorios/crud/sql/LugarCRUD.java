@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+
 /**
  *
  * @author daniel
@@ -26,8 +28,8 @@ public class LugarCRUD implements CRUD<Lugar>{
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, lugar.getId());
             statement.setString(2, lugar.getDireccion());
-            statement.setInt(3, lugar.getDepartamento().getId());
-            statement.setInt(4, lugar.getMunicipio().getId());
+            statement.setInt(3, lugar.getDepartamento());
+            statement.setInt(4, lugar.getMunicipio());
             statement.executeUpdate();
             System.out.println("Lugar creado con éxito.");
         } catch (SQLException e) {
@@ -37,7 +39,7 @@ public class LugarCRUD implements CRUD<Lugar>{
     }
 
     @Override
-    public Lugar get(int id) {
+    public Lugar getById(int id) {
         String query = "SELECT * FROM lugar WHERE id = ?";
         String direccion = "";
         int departamento_id = 1;
@@ -64,9 +66,12 @@ public class LugarCRUD implements CRUD<Lugar>{
             e.printStackTrace();
         }
 
-        Departamento departamento_asociado = departamentoCRUD.get(departamento_id);
-        Municipio municipio_asociado = municipioCRUD.get(municipio_id);
-        return new Lugar(id, direccion, departamento_asociado, municipio_asociado);
+        return new Lugar(id, direccion, departamento_id, municipio_id);
+    }
+
+    @Override
+    public List<Lugar> getAll() {
+        return null;
     }
 
     @Override
@@ -75,8 +80,8 @@ public class LugarCRUD implements CRUD<Lugar>{
         try (PreparedStatement statement = conexion.prepareStatement(query)) {
             statement.setInt(1, lugar.getId());
             statement.setString(2, lugar.getDireccion());
-            statement.setInt(3, lugar.getDepartamento().getId());
-            statement.setInt(4, lugar.getMunicipio().getId());
+            statement.setInt(3, lugar.getDepartamento());
+            statement.setInt(4, lugar.getMunicipio());
             statement.setInt(5, id);
             statement.executeUpdate();
             System.out.println("Lugar editado con éxito.");

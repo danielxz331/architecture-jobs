@@ -6,6 +6,7 @@ import com.app.student.repositorios.crud.sql.MunicipioCRUD;
 import com.app.student.repositorios.crud.files.MunicipiosCreados;
 import com.app.student.interfaces.Repositorio;
 import java.sql.Connection;
+import java.util.List;
 
 public class MunicipioRepositorio implements Repositorio<Municipio>{
 
@@ -26,7 +27,12 @@ public class MunicipioRepositorio implements Repositorio<Municipio>{
 
     @Override
     public Municipio get(int id) {
-        return municipioCRUD.get(id);
+        return municipiosCreados.getById(id);
+    }
+
+    @Override
+    public List<Municipio> getAll() {
+        return municipiosCreados.getAll();
     }
 
     @Override

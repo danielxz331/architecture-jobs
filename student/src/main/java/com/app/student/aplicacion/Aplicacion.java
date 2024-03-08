@@ -1,6 +1,9 @@
 package com.app.student.aplicacion;
 
 import com.app.student.seeds.DATA_SEED;
+
+import com.app.student.repositorios.*;
+
 /**
  *
  * @author daniel
