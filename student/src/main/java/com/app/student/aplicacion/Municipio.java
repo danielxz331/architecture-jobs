@@ -18,6 +18,9 @@ public class Municipio {
         this.departamentoId = departamentoId;
     }
 
+    public Municipio() {
+    }
+
     public int getId() {
         return id;
     }

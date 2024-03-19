@@ -21,6 +21,9 @@ public class Lugar {
         this.municipioId = municipioId;
     }
 
+    public Lugar() {
+    }
+
     public int getId() {
         return id;
     }
